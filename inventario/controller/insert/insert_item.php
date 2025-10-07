@@ -1,10 +1,10 @@
 <?php
 require "../conecta_bd.php"; // Aqui deve conter a conexão PDO em $conn
-print_r($_POST);
+
 if (
     isset($_POST["numero_tombamento"], $_POST["nome_item"], $_POST["descricao_item"],
           $_POST["unidade_de_medida"], $_POST["status_item"], $_POST["data_aquisicao"],
-          $_POST["id_local"], $_POST["id_categoria"])
+          $_POST["id_localizacao"], $_POST["id_categoria"])
 ) {
     // Agora sim: podemos acessar os valores com segurança
     $numero_tombamento = $_POST["numero_tombamento"];
@@ -13,7 +13,7 @@ if (
     $unidade_de_medida = $_POST["unidade_de_medida"];
     $status_item = $_POST["status_item"];
     $data_aquisicao = $_POST["data_aquisicao"];
-    $id_localizacao = $_POST["id_local"];
+    $id_localizacao = $_POST["id_localizacao"];
     $id_categoria = $_POST["id_categoria"];
 
     // ... continua com o restante do seu código
@@ -44,7 +44,7 @@ if (
     $stmt->execute();
 
     echo json_encode(["sucesso" => true, "mensagem" => "Item inserido com sucesso"]);
-    header("Location: ../../view/cadastro-lista-itens.php?cadastro=sucesso");
+    header("location: ../../view/cadastro-lista-itens.php?cadastro=sucesso");
 
 } catch (Exception $e) {
     echo json_encode(["erro" => $e->getMessage()]);

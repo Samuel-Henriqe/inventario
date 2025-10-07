@@ -1,10 +1,10 @@
 <?php
+session_start();
 
 
 require "conecta_bd.php";
 
 header('Content-Type: application/json');
-print_r($_POST);
 
 if (isset($_POST["usuario"]) && isset($_POST["senha"])) {
     $usuario = $_POST["usuario"];
@@ -17,14 +17,15 @@ if (isset($_POST["usuario"]) && isset($_POST["senha"])) {
         $stmt->execute();
 
         $login = $stmt->fetch(PDO::FETCH_ASSOC);
+        
         // && password_verify($senha, $login['senha'])
         if ($login) {
-            $cargo = $login['cargo'];
-            echo json_encode(["Login" => true, "cargo" => $cargo]);
-            if($cargo ){
-                header("Location: ../view/home.php");
-            }
-            
+
+            $_SESSION['siape'] = $login['siape'];
+            $_SESSION['cargo'] = $login['cargo'];
+
+            echo json_encode(["Login" => true, "cargo" => $_SESSION['cargo']]);
+            header("location: ../view/home.php");
         } else {
             echo json_encode(["Login" => false, "erro" => "Usuário ou senha inválidos"]);
         }
