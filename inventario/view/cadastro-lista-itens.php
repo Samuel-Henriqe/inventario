@@ -35,6 +35,15 @@
              <a href="movimento.php">Movimentação</a>
 
             </ul>
+        <br> <br>
+            <ul>
+             <a href="relatorio.php">Relatórios</a>
+
+            </ul>
+        <br> <br>
+            <ul>
+             <a href="../index.php">Sair</a>
+            </ul>
         </div> 
     <main>  
 
@@ -73,8 +82,9 @@
                                 echo "<td>" . htmlspecialchars($itens['id_localizacao']) . "</td>";
                                 echo "<td>" . htmlspecialchars($itens['id_categoria']) . "</td>";
                                 echo "<td>";
-                                echo "<button id='edit-btn'>Editar</button>";
-                                echo "<button id='delete-btn'>Excluir</button>";
+                                echo "<button id='editbtn' >Editar</button>";    
+                                echo "<button id='deletebtn' onclick='excluirItem(\"" . htmlspecialchars($itens['numero_tombamento'], ENT_QUOTES) . "\")'>Excluir</button>";
+                                echo "<button id='viewbtn'>Etiqueta</button>";
                                 echo "</td>";
                                 echo "</tr>";
                                 }
@@ -112,7 +122,7 @@
     <input type="date" id="data_aquisicao" name="data_aquisicao" required>
 
     <label for="id_localizacao">Localização:</label>
-    <select name="id_localizacao" id="id_localizacao" required>
+    <select name="id_localizacao" id="localizacao_item" required>
         <option value="">Carregando localizações...</option>
     </select>
 
@@ -176,6 +186,38 @@
 
 
     </main>
+<script>
+  function excluirItem(numero_de_tombamento) {
+    // Confirmação do usuário
+    if (!confirm("Tem certeza que deseja excluir este item?")) {
+      return;
+    }
+
+    // Envia o ID via POST usando fetch
+    fetch('../controller/delete/delete_item.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'id=' + encodeURIComponent(numero_de_tombamento)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.sucesso) {
+        alert("Item excluído com sucesso.");
+        location.reload(); // Recarrega a página para atualizar a tabela
+      } else {
+        alert("Erro ao excluir: " + data.erro);
+      }
+    })
+    .catch(error => {
+      console.error("Erro na requisição:", error);
+      alert("Erro ao conectar com o servidor.");
+    });
+  }
+ 
+</script>
+
  
     <footer>
         <p>&copy; 2025 Inventário de Itens</p>
