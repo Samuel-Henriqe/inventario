@@ -1,0 +1,493 @@
+/*
+ * --------------------------------
+ * ESTILIZAÇÃO GERAL E TIPOGRAFIA
+ * --------------------------------
+ */
+body {
+    font-family: 'Roboto', Arial, sans-serif; /* Fonte mais moderna */
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Fundo mais suave */
+    color: #333; /* Cor de texto principal mais escura para legibilidade */
+    line-height: 1.6; /* Melhor legibilidade */
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee; /* Adiciona uma borda inferior sutil */
+}
+
+/*
+ * --------------------------------
+ * CABEÇALHO (HEADER)
+ * --------------------------------
+ */
+header {
+    background: #2f9e41; /* Cor primária: Verde */
+    color: #ffffff;
+    padding: 15px 20px; /* Mais preenchimento */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para profundidade */
+    position: fixed; /* Fixar no topo */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1010; /* Acima do menu e conteúdo */
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.8em; /* Tamanho do título */
+    font-weight: 500; /* Peso de fonte */
+}
+
+/*
+ * --------------------------------
+ * MENU DE NAVEGAÇÃO (div#menu)
+ * --------------------------------
+ */
+div#menu {
+    background-color: #2f9e41;
+    padding: 20px 0; /* Preenchimento ajustado */
+    width: 220px;
+    position: fixed;
+    left: 0;
+    top: 66px; /* Ajustado para ficar abaixo do header fixo (depende do padding do header) */
+    height: calc(100vh - 66px); /* Ocupa o restante da altura da viewport */
+    box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaço menor entre os itens de menu */
+    transition: width 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1000;
+}
+
+div#menu:hover {
+    width: 230px; /* Aumento sutil no hover */
+    background-color: #298c39; /* Verde levemente mais escuro */
+    box-shadow: 4px 0 16px rgba(0,0,0,0.2);
+}
+
+div#menu ul {
+    list-style: none; /* Remove marcadores da lista */
+    padding: 0;
+    margin: 0 10px; /* Margem lateral para o contêiner dos links */
+}
+
+div#menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 6px; /* Cantos mais arredondados */
+    display: block; /* Ocupa a largura total */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-weight: 500;
+}
+
+div#menu a:hover {
+    background-color: #ce181e; /* Cor secundária: Vermelho */
+    transform: translateX(5px); /* Efeito de deslizar sutil */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+div#menu a:active {
+    background-color: #a31418;
+    transform: scale(0.98);
+}
+
+form#login-form {
+    max-width: 400px;
+    width: 100%;
+    margin: 100px auto 0 auto; /* Centraliza o formulário e adiciona margem superior */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Estilização específica para o botão de login */
+#login-btn {
+    width: 100%;
+    background: #c0392b; /* Vermelho para o botão de login */
+    font-size: 1em;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+}
+
+
+section {
+    margin-bottom: 25px;
+    background: #ffffff;
+    padding: 20px; /* Mais preenchimento interno */
+    border-radius: 8px; /* Cantos mais suaves */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra mais destacada */
+    border-left: 5px solid #2f9e41; /* Borda de destaque lateral */
+}
+
+h2 {
+    color: #2f9e41;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+/*
+ * --------------------------------
+ * FORMULÁRIO (section#form-section)
+ * --------------------------------
+ */
+section#form-section {
+    max-width: 500px; /* Aumenta a largura para um visual mais equilibrado */
+    margin: 40px 0; /* Ajusta margem para não centralizar o formulário */
+    border: none; /* Remove a borda simples */
+    border-left: 5px solid #ce181e; /* Borda de destaque diferente */
+}
+
+form#itemform {
+    display: flex;
+    flex-direction: column;
+
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: 600; /* Texto da label em negrito */
+    color: #555;
+    margin-top: 10px;
+}
+
+input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+    border-color: #2f9e41;
+    box-shadow: 0 0 5px rgba(47, 158, 65, 0.5);
+    outline: none; /* Remove outline padrão do navegador */
+}
+
+/*
+ * --------------------------------
+ * BOTÕES
+ * --------------------------------
+ */
+button {
+    padding: 12px 20px;
+    background: #ce181e; /* Vermelho como cor de ação principal */
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #a31418; /* Vermelho mais escuro no hover */
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+/* Estilização para botões de ação na tabela (Editar/Excluir) */
+td button {
+    margin: 5px;
+    padding: 8px 12px;
+    font-size: 0.9em;
+}
+
+/* Botão Excluir */
+td button#delete-btn {
+    background: #e74c3c;
+}
+td button#delete-btn:hover {
+    background: #c0392b;
+}
+
+/* Botão Editar */
+td button#edit-btn {
+    background: #3498db; /* Um azul para diferenciar */
+}
+td button#edit-btn:hover {
+    background: #2980b9;
+}
+
+
+/*
+ * --------------------------------
+ * TABELA
+ * --------------------------------
+ */
+table {
+    width: 100%;
+    border-collapse: separate; /* Permite border-radius */
+    border-spacing: 0;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden; /* Garante que o border-radius funcione */
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left; /* Alinhamento à esquerda para melhor leitura */
+}
+
+th:last-child, td:last-child {
+    text-align: center; /* Centraliza a coluna de ações */
+}
+
+th {
+    background: #2f9e41;
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+/* Arredondamento dos cantos do cabeçalho */
+th:first-child {
+    border-top-left-radius: 8px;
+}
+th:last-child {
+    border-top-right-radius: 8px;
+}
+
+
+tr:nth-child(even) {
+    background: #f8f8f8; /* Listras mais sutis */
+}
+
+tr:hover {
+    background-color: #eef; /* Destaque ao passar o mouse */
+}
+
+/* Remove a borda inferior da última linha do corpo da tabela */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/*
+ * --------------------------------
+ * RODAPÉ (FOOTER)
+ * --------------------------------
+ */
+footer {
+    text-align: center;
+    padding: 15px 0;
+    background: #2f9e41;
+    color: #ffffff;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+
+
+
+ul#home {
+    display: inline-block;
+    background: #2f9e41;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 32px 32px; /* Quadrado: altura igual à largura */
+    border-radius: 16px; /* Bordas arredondadas */
+    margin: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    text-align: center;
+    border: 2px solid #fff;
+    cursor: pointer;
+   
+    width: 200px; /* Define largura fixa */
+    height: 120px; /* Define altura fixa para quadrado */
+    /* Centraliza verticalmente o texto */
+    vertical-align: middle;
+}
+
+ul#home:hover {
+    background: #ce181e;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    color: #fff;
+}
+ul#home:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+ul#home a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 120px; /* Centraliza verticalmente o texto */
+}
+div#home {
+    text-align: center;
+    margin-top: 100px; /* Espaço do topo para evitar sobreposição com o header */
+}
+p#info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 10px 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: fit-content;
+}
+div#menulocalizacao {
+    background-color: #2f9e41;
+    padding: 20px 0; /* Preenchimento ajustado */
+    width: 220px;
+    position: fixed;
+    left: 0;
+    top: 66px; /* Ajustado para ficar abaixo do header fixo (depende do padding do header) */
+    height: calc(100vh - 66px); /* Ocupa o restante da altura da viewport */
+    box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaço menor entre os itens de menu */
+    transition: width 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1000;
+}
+div#menulocalizacao:hover {
+    width: 230px; /* Aumento sutil no hover */
+    background-color: #298c39; /* Verde levemente mais escuro */
+    box-shadow: 4px 0 16px rgba(0,0,0,0.2);
+}
+div#menulocalizacao ul {
+    list-style: none; /* Remove marcadores da lista */
+    padding: 0;
+    margin: 0 10px; /* Margem lateral para o contêiner dos links */
+    color: #fff;
+}
+div#menulocalizacao a {
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 6px; /* Cantos mais arredondados */
+    display: block; /* Ocupa a largura total */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-weight: 500;
+}
+div#menulocalizacao a:hover {
+    background-color: #ce181e; /* Cor secundária: Vermelho */
+    transform: translateX(5px); /* Efeito de deslizar sutil */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+div#menulocalizacao a:active {
+    background-color: #a31418;
+    transform: scale(0.98);
+}
+/* Estilização para modal de QR Code */
+#qrModal {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    z-index: 1050; /* Acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Habilita scroll se necessário */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+}
+#qrModalContent {
+    background-color: #fefefe;
+    margin: 10% auto; /* Centraliza verticalmente e horizontalmente */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; /* Largura do modal */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    text-align: center;
+}
+#qrModalContent img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 15px;
+}
+#closeModal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#closeModal:hover,
+#closeModal:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+div#tabela_de_localizacao{
+    margin-left: 220px; /* Corresponde à largura do menu fixo */
+    margin-top: 66px; /* Corresponde à altura do header fixo */
+    padding: 30px 25px;
+
+    box-sizing: border-box;
+}
+/* Estilização para mensagens de erro */
+.error-message {
+    color: #e74c3c; /* Vermelho para indicar erro */
+    background-color: #fdecea; /* Fundo vermelho claro */
+    border: 1px solid #f5c6cb; /* Borda vermelha clara */
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+/* Estilização para mensagens de sucesso */
+.success-message {
+    color: #27ae60; /* Verde para indicar sucesso */
+    background-color: #eafaf1; /* Fundo verde claro */
+    border: 1px solid #c3e6cb; /* Borda verde clara */
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}   
+div#tabela_de_localizacao table {
+    width: 100%;
+    border-collapse: separate; /* Permite border-radius */
+    border-spacing: 0;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden; /* Garante que o border-radius funcione */
+}
+div#adicionar-localizacao {
+    margin-left: 220px; /* Corresponde à largura do menu fixo */
+    margin-top: 66px; /* Corresponde à altura do header fixo */
+    padding: 30px 25px;
+    min-height: calc(100vh - 126px); /* Altura total - Header - Footer */
+    box-sizing: border-box;
+}
+/* Estilização para o formulário de adicionar localização */
+form#localizacao-form {
+    max-width: 500px; /* Aumenta a largura para um visual mais equilibrado */
+    border: none; /* Remove a borda simples */
+    display: flex;
+    flex-direction: column;
+}
