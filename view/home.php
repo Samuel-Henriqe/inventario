@@ -1,82 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
+<!-- ========================================
+     CABEÇALHO DO DOCUMENTO HTML
+     ========================================
+     Página principal do sistema - Dashboard com navegação
+-->
 <head>
+    <!-- Configurações básicas do documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <!-- Bootstrap CSS (CDN) -->
+    <title>Home - Sistema de Inventário</title>
+    
+    <!-- FOLHAS DE ESTILO (CSS) -->
+    <!-- Bootstrap CSS: Framework CSS para responsividade e componentes -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Estilos personalizados: cores do projeto, header fixo, footer -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Overrides para imagens e utilitários (carregado após o styles.css) -->
+    
+    <!-- Overrides específicos: utilitários para imagens, QR codes e offcanvas -->
+    <!-- IMPORTANTE: carregado após styles.css para sobrescrever estilos -->
     <link rel="stylesheet" href="bootstrap-overrides.css">
-        <!-- Bootstrap Bundle JS (inclui Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<header class="d-flex align-items-center justify-content-between px-3" style="height:var(--header-height);">
-        <div>
-            <button class="btn btn-outline-light d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">☰</button>
-            <button class="btn btn-outline-light d-none d-md-inline-block menu-toggle ms-2" title="Abrir/Fechar menu">☰</button>
-        </div>
-        <h1 class="mb-0">Bem-vindo ao Sistema de Inventário</h1>
-</header>
 
-<!-- Offcanvas menu (mobile) -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <ul class="list-unstyled">
-            <li><a href="home.php" class="d-block py-2">Home</a></li>
-            <li><a href="cadastro-lista-itens.php" class="d-block py-2">Cadastrar item</a></li>
-            <li><a href="localizacao.php" class="d-block py-2">Localização</a></li>
-            <li><a href="movimento.php" class="d-block py-2">Movimentação</a></li>
-            <li><a href="item.php" class="d-block py-2">Item</a></li>
-            <li><a href="categorias.php" class="d-block py-2">Categorias</a></li>
-            <li><a href="usuarios.php" class="d-block py-2">Usuários</a></li>
-            <li><a href="relatorios.php" class="d-block py-2">Relatórios</a></li>
-        </ul>
-    </div>
-</div>
-<br><br><br>
+<!-- ========================================
+     CORPO DA PÁGINA
+     ========================================
+     Dashboard principal com navegação em grid responsivo
+-->
 <body>
-      <p id="info">Utilize o menu para navegar pelas funcionalidades do sistema.</p>
-<div id="home" class="container" style="margin-top:60px;">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-        <div class="col text-center">
-            <a href="cadastro-lista-itens.php" class="btn btn-success btn-lg w-100 py-4">Cadastrar item</a>
+    <!-- CABEÇALHO FIXO COM NAVEGAÇÃO -->
+    <!-- Header responsivo: botões de menu para mobile e desktop -->
+    <header class="d-flex align-items-center justify-content-between px-3" 
+            style="height:var(--header-height);">
+        
+        <!-- CONTROLES DE MENU -->
+        <div>
+            <!-- Botão para menu mobile (offcanvas) -->
+            <!-- Visível apenas em telas pequenas (d-md-none) -->
+            <button class="btn btn-outline-light d-md-none" 
+                    type="button" 
+                    data-bs-toggle="offcanvas" 
+                    data-bs-target="#offcanvasMenu" 
+                    aria-controls="offcanvasMenu">☰</button>
+            
+            <!-- Botão para menu desktop (lateral fixo) -->
+            <!-- Visível apenas em telas médias+ (d-none d-md-inline-block) -->
+            <button class="btn btn-outline-light d-none d-md-inline-block menu-toggle ms-2" 
+                    title="Abrir/Fechar menu">☰</button>
         </div>
-        <div class="col text-center">
-            <a href="localizacao.php" class="btn btn-success btn-lg w-100 py-4">Localização</a>
-        </div>
-        <div class="col text-center">
-            <a href="movimento.php" class="btn btn-success btn-lg w-100 py-4">Movimentação</a>
-        </div>
-        <div class="col text-center">
-            <a href="item.php" class="btn btn-success btn-lg w-100 py-4">Item</a>
-        </div>
-        <div class="col text-center">
-            <a href="categorias.php" class="btn btn-success btn-lg w-100 py-4">Categorias</a>
-        </div>
-        <div class="col text-center">
-            <a href="usuarios.php" class="btn btn-success btn-lg w-100 py-4">Usuários</a>
-        </div>
-        <div class="col text-center">
-            <a href="relatorios.php" class="btn btn-success btn-lg w-100 py-4">Relatórios</a>
-        </div>
-        <div class="col text-center">
-            <a href="../index.php" class="btn btn-outline-secondary btn-lg w-100 py-4">Sair</a>
+        
+        <!-- TÍTULO PRINCIPAL -->
+        <h1 class="mb-0">Bem-vindo ao Sistema de Inventário</h1>
+    </header>
+
+    <!-- ESPAÇAMENTO VISUAL -->
+    <!-- Compensação adicional para o header fixo -->
+    <br><br><br>
+    
+    <!-- TEXTO INFORMATIVO -->
+    <!-- Instrução para o usuário sobre como navegar -->
+    <p id="info">Utilize o menu para navegar pelas funcionalidades do sistema.</p>
+
+    <!-- DASHBOARD PRINCIPAL -->
+    <!-- Container Bootstrap com grid responsivo para os botões de navegação -->
+    <div id="home" class="container" style="margin-top:60px;">
+        
+        <!-- GRID RESPONSIVO DE BOTÕES -->
+        <!-- row-cols-*: define quantas colunas por breakpoint -->
+        <!-- 1 coluna mobile, 2 tablet, 3 desktop -->
+        <!-- g-3: gap/espaçamento entre itens -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
+            
+            <!-- FUNCIONALIDADES PRINCIPAIS -->
+            
+            <!-- Cadastrar Item: formulário para novos itens -->
+            <div class="col text-center">
+                <a href="cadastro-lista-itens.php" 
+                   class="btn btn-success btn-lg w-100 py-4">
+                    Cadastrar item
+                </a>
+            </div>
+            
+            <!-- Localização: gerenciar locais/setores -->
+            <div class="col text-center">
+                <a href="localizacao.php" 
+                   class="btn btn-success btn-lg w-100 py-4">
+                    Localização
+                </a>
+            </div>
+            
+            <!-- Movimentação: transferências de itens -->
+            <div class="col text-center">
+                <a href="movimento.php" 
+                   class="btn btn-success btn-lg w-100 py-4">
+                    Movimentação
+                </a>
+            </div>
+            
+            <!-- Item: consultar/editar itens existentes -->
+            <div class="col text-center">
+                <a href="item.php" 
+                   class="btn btn-success btn-lg w-100 py-4">
+                    Item
+                </a>
+            </div>
+            
+            <!-- Categorias: gerenciar tipos de itens -->
+            <div class="col text-center">
+                <a href="categorias.php" 
+                   class="btn btn-success btn-lg w-100 py-4">
+                    Categorias
+                </a>
+            </div>
+            
+            <!-- Usuários: administração de contas -->
+            <div class="col text-center">
+                <a href="usuarios.php" 
+                   class="btn btn-success btn-lg w-100 py-4">
+                    Usuários
+                </a>
+            </div>
+            
+            <!-- Relatórios: visualização de dados -->
+            <div class="col text-center">
+                <a href="relatorios.php" 
+                   class="btn btn-success btn-lg w-100 py-4">
+                    Relatórios
+                </a>
+            </div>
+            
+            <!-- LOGOUT -->
+            <!-- Botão diferenciado (outline-secondary) para sair -->
+            <!-- Retorna para a página de login (../index.php) -->
+            <div class="col text-center">
+                <a href="../index.php" 
+                   class="btn btn-outline-secondary btn-lg w-100 py-4">
+                    Sair
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- Menu toggle script -->
+    <!-- ESPAÇAMENTO INFERIOR -->
+    <!-- Espaço visual antes do footer -->
+    <br><br><br>
+
+    <!-- SCRIPTS JAVASCRIPT -->
+    <!-- Bootstrap Bundle: JavaScript para componentes interativos -->
+    <!-- Inclui Popper.js para tooltips, dropdowns, modais -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script personalizado: controle do menu lateral -->
+    <!-- Gerencia abertura/fechamento e persistência no localStorage -->
     <script src="js/menu-toggle.js"></script>
 
-</body>
-<br><br><br>
-
+    <!-- RODAPÉ -->
+    <!-- Footer simples com copyright -->
+    <!-- Estilo definido em styles.css -->
     <footer>
         <p>&copy; 2025 Inventário de Itens</p>
     </footer>
+</body>
+
 </html>

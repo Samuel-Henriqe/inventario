@@ -4,8 +4,6 @@ session_start();
 
 require "conecta_bd.php";
 
-header('Content-Type: application/json');
-
 if (isset($_POST["usuario"]) && isset($_POST["senha"])) {
     $usuario = $_POST["usuario"];
     $senha = $_POST["senha"];
@@ -18,21 +16,29 @@ if (isset($_POST["usuario"]) && isset($_POST["senha"])) {
 
         $login = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        // && password_verify($senha, $login['senha'])
-        if ($login) {
-
+        // Verificar se usuário existe e senha confere
+        if ($login && password_verify($senha, $login['senha'])) {
             $_SESSION['siape'] = $login['siape'];
             $_SESSION['cargo'] = $login['cargo'];
+            $_SESSION['usuario_logado'] = true;
 
-            echo json_encode(["Login" => true, "cargo" => $_SESSION['cargo']]);
-            header("location: ../view/home.php");
+            // Redirecionamento direto para home
+            header("Location: ../view/home.php");
+            exit();
         } else {
-            echo json_encode(["Login" => false, "erro" => "Usuário ou senha inválidos"]);
+            // Volta para login com erro
+            $_SESSION['erro_login'] = "Usuário ou senha inválidos";
+            header("Location: ../index.php");
+            exit();
         }
     } catch (PDOException $e) {
-        echo json_encode(["Login" => false, "erro" => "Erro no servidor: " . $e->getMessage()]);
+        $_SESSION['erro_login'] = "Erro no servidor: " . $e->getMessage();
+        header("Location: ../index.php");
+        exit();
     }
 } else {
-    echo json_encode(["Login" => false, "erro" => "Os campos 'usuario' e 'senha' não foram preenchidos."]);
+    $_SESSION['erro_login'] = "Os campos 'usuario' e 'senha' devem ser preenchidos.";
+    header("Location: ../index.php");
+    exit();
 }
 ?>

@@ -1,73 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
+<!-- ========================================
+     CABEÇALHO DO DOCUMENTO HTML
+     ========================================
+     Define metadados, título e carrega recursos externos
+-->
 <head>
+    <!-- Configurações básicas do documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- Bootstrap CSS (CDN) -->
+    <title>Login - Sistema de Inventário</title>
+    
+    <!-- FOLHAS DE ESTILO (CSS) -->
+    <!-- Bootstrap CSS: Framework CSS para responsividade e componentes -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Estilos personalizados: cores do projeto, header fixo, footer -->
     <link rel="stylesheet" href="view/styles.css">
-    <!-- Overrides para imagens e utilitários -->
+    
+    <!-- Overrides específicos: utilitários para imagens, QR codes e offcanvas -->
     <link rel="stylesheet" href="view/bootstrap-overrides.css">
+    
+    <!-- SCRIPTS JAVASCRIPT -->
+    <!-- Bootstrap Bundle: inclui JavaScript do Bootstrap + Popper.js para modais/tooltips -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- SweetAlert2: biblioteca para alertas bonitos e interativos -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Script personalizado: substitui alert() padrão por SweetAlert2 -->
     <script src="view/js/alert-override.js"></script>
-    <script src="view/js/menu-toggle.js"></script>
 </head>
-<body>
-        <header class="d-flex align-items-center justify-content-between px-3" style="height:var(--header-height);">
-                <button class="btn btn-outline-light d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
-                        ☰
-                </button>
-                <h1 class="mb-0">Entrar</h1>
-        </header>
 
-        <!-- Offcanvas menu (mobile) -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="list-unstyled">
-                    <li><a href="view/home.php" class="d-block py-2">Home</a></li>
-                    <li><a href="view/cadastro-lista-itens.php" class="d-block py-2">Cadastrar item</a></li>
-                    <li><a href="view/localizacao.php" class="d-block py-2">Localização</a></li>
-                    <li><a href="view/movimento.php" class="d-block py-2">Movimentação</a></li>
-                    <li><a href="view/item.php" class="d-block py-2">Item</a></li>
-                    <li><a href="view/categorias.php" class="d-block py-2">Categorias</a></li>
-                    <li><a href="view/usuarios.php" class="d-block py-2">Usuários</a></li>
-                    <li><a href="view/relatorios.php" class="d-block py-2">Relatórios</a></li>
-                </ul>
-            </div>
-        </div>
+<!-- ========================================
+     CORPO DA PÁGINA
+     ========================================
+     Estrutura visual principal da página de login
+-->
+<body>
+    <!-- CABEÇALHO FIXO -->
+    <!-- Header com altura fixa definida em --header-height (66px) -->
+    <!-- Usa classes Bootstrap para layout flexível e espaçamento -->
+    <header class="d-flex align-items-center justify-content-between px-3" 
+            style="height:var(--header-height);">
+        <h1 class="mb-0">Entrar</h1>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- Container Bootstrap limitado a 420px para formulário compacto -->
+    <!-- margin-top compensa a altura do header fixo -->
     <main>
         <div class="container" style="max-width:420px; margin-top:90px;">
-        <form action="controller/login.php" method="POST" id ="login-form">
-            <div class="mb-3">
-                <label for="username" class="form-label">Usuário</label>
-                <input type="text" id="username" name="usuario" class="form-control" required>
-            </div>
+            
+            <!-- SISTEMA DE ALERTAS DE ERRO -->
+            <!-- PHP: verifica se há mensagens de erro na sessão -->
+            <!-- Exibe alertas Bootstrap dismissíveis para feedback ao usuário -->
+            <?php
+            session_start();
+            if (isset($_SESSION['erro_login'])) {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+                echo htmlspecialchars($_SESSION['erro_login']); // Sanitiza saída para segurança
+                echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                echo '</div>';
+                unset($_SESSION['erro_login']); // Remove erro após exibir
+            }
+            ?>
+            
+            <!-- FORMULÁRIO DE LOGIN -->
+            <!-- Envia dados via POST para controller/login.php -->
+            <!-- Bootstrap classes para estilização responsiva -->
+            <form action="controller/login.php" method="POST" id="login-form">
+                
+                <!-- Campo de usuário (email) -->
+                <div class="mb-3">
+                    <label for="username" class="form-label">Usuário</label>
+                    <input type="text" 
+                           id="username" 
+                           name="usuario" 
+                           class="form-control" 
+                           required>
+                </div>
 
-            <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
-                <input type="password" id="password" name="senha" class="form-control" required>
-            </div>
+                <!-- Campo de senha -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" 
+                           id="password" 
+                           name="senha" 
+                           class="form-control" 
+                           required>
+                </div>
 
-            <button class="btn btn-primary w-100 mb-2" type="submit">Login</button>
-            <button class="btn btn-link w-100" type="button" onclick="window.location.href='view/esqueci-senha.php'">Esqueci minha senha</button>
-        </form>
+                <!-- Botões de ação -->
+                <!-- Botão principal: submete o formulário -->
+                <button class="btn btn-primary w-100 mb-2" type="submit">Login</button>
+                
+                <!-- Botão secundário: redireciona para recuperação de senha -->
+                <button class="btn btn-link w-100" 
+                        type="button" 
+                        onclick="window.location.href='view/esqueci-senha.php'">
+                    Esqueci minha senha
+                </button>
+            </form>
         </div>
     </main>
-</body>
 
+    <!-- RODAPÉ -->
+    <!-- Footer simples com copyright -->
+    <!-- Estilo definido em styles.css -->
     <footer>
         <p>&copy; 2025 Inventário de Itens</p>
     </footer>
-  
-
-<!-- Adicionado: SweetAlert2 e override para alert -->
-<!-- Bootstrap Bundle JS (inclui Popper) -->
+</body>
 
 </html>

@@ -1,23 +1,91 @@
-/*
-    Este script gera QR Codes para cada item cadastrado.
-    Supõe tabela com colunas: [0]=Nome, [1]=Número do Tombamento, [2]=Descrição, [3]=Unidade, [4]=Status, [5]=Data, [6]=Localização, [7]=Categoria
-    Usa QRCode.js (carregado antes deste arquivo)
+/* ===================================================
+   SISTEMA DE GERAÇÃO DE QR CODES PARA ETIQUETAS
+   ===================================================
+   
+   PROPÓSITO:
+   - Gera QR Codes para itens do inventário
+   - Oferece funcionalidade de impressão das etiquetas
+   - Suporte para modal (SweetAlert2) e inserção em tabelas
+   
+   DEPENDÊNCIAS:
+   - QRCode.js (biblioteca externa para geração de QR)
+   - SweetAlert2 (para modais bonitos - opcional)
+   
+   ESTRUTURA DA TABELA ESPERADA:
+   [0] = Nome do item
+   [1] = Número do Tombamento
+   [2] = Descrição
+   [3] = Unidade
+   [4] = Status
+   [5] = Data de Aquisição
+   [6] = Localização
+   [7] = Categoria
+   
+   FUNÇÕES PRINCIPAIS:
+   1. gerarQRCodesParaItens() - Gera QR para toda a tabela
+   2. gerarQRCodeParaLinha() - Gera QR para linha específica
+   3. gerarQRCodeParaItem() - Gera QR em modal
+   4. imprimirQRCode() - Abre janela de impressão
+   ===================================================
 */
 
-function gerarQRCodesParaItens() {
-    const tabela = document.getElementById('tabela-itens') || document.querySelector('table');
-    if (!tabela) return;
+/* ========================================
+   1. GERAÇÃO EM MASSA DE QR CODES
+   ========================================
+   Percorre toda a tabela gerando QR para cada linha
+*/
 
+/**
+ * Gera QR Codes para todos os itens de uma tabela
+ * 
+ * FUNCIONAMENTO:
+ * - Busca tabela por ID 'tabela-itens' ou primeiro <table> encontrado
+ * - Pula linha de cabeçalho (começa do índice 1)
+ * - Evita gerar QR duplicado (verifica dataset.qrGenerated)
+ * - Chama gerarQRCodeParaLinha() para cada linha
+ */
+function gerarQRCodesParaItens() {
+    // Busca a tabela de itens na página
+    const tabela = document.getElementById('tabela-itens') || document.querySelector('table');
+    if (!tabela) return; // Sai se não encontrar tabela
+
+    // Percorre todas as linhas (exceto cabeçalho)
     for (let i = 1; i < tabela.rows.length; i++) {
         const row = tabela.rows[i];
+        
+        // Pula se QR já foi gerado para esta linha
         if (row.dataset.qrGenerated === '1') continue;
+        
+        // Gera QR Code para a linha atual
         gerarQRCodeParaLinha(row);
     }
 }
 
+/* ========================================
+   2. GERAÇÃO DE QR CODE PARA LINHA ESPECÍFICA
+   ========================================
+   Cria QR Code e botão de impressão em uma linha da tabela
+*/
+
+/**
+ * Gera QR Code para uma linha específica da tabela
+ * 
+ * PARÂMETROS:
+ * @param {HTMLTableRowElement} row - Linha da tabela HTML
+ * 
+ * FUNCIONAMENTO:
+ * - Extrai dados de todas as células da linha
+ * - Monta string com informações formatadas
+ * - Cria nova célula com QR Code
+ * - Adiciona botão de impressão
+ * - Marca linha como processada
+ */
 function gerarQRCodeParaLinha(row) {
+    // Validações iniciais
     if (!row || row.dataset.qrGenerated === '1') return;
 
+    // EXTRAÇÃO DE DADOS DAS CÉLULAS
+    // Verifica se célula existe e tem conteúdo, senão usa string vazia
     const nome = (row.cells[0] && row.cells[0].innerText) ? row.cells[0].innerText.trim() : '';
     const numero_tombamento = (row.cells[1] && row.cells[1].innerText) ? row.cells[1].innerText.trim() : '';
     const descricao = (row.cells[2] && row.cells[2].innerText) ? row.cells[2].innerText.trim() : '';
@@ -27,9 +95,12 @@ function gerarQRCodeParaLinha(row) {
     const localizacao = (row.cells[6] && row.cells[6].innerText) ? row.cells[6].innerText.trim() : '';
     const categoria = (row.cells[7] && row.cells[7].innerText) ? row.cells[7].innerText.trim() : '';
 
+    // FORMATAÇÃO DO TEXTO PARA O QR CODE
+    // Template string com todas as informações do item
     const info = `Número de Tombamento: ${numero_tombamento}\nNome: ${nome}\nDescrição: ${descricao}\nUnidade: ${unidade}\nStatus: ${status}\nData: ${dataAq}\nLocalização: ${localizacao}\nCategoria: ${categoria}`;
 
-    // evita duplicar célula de QR
+    // VALIDAÇÃO PARA EVITAR DUPLICAÇÃO
+    // Verifica se já existe célula QR nesta linha
     if (row.querySelector('.qr-cell')) return;
 
     const qrCell = row.insertCell(-1);
