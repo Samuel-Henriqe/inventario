@@ -46,16 +46,18 @@ function gerarQRCodeParaLinha(row) {
                 height: 100
             });
             // botão de impressão para cada QR gerado na linha
+            const printWrapper = document.createElement('div');
+            printWrapper.className = 'qr-print-wrapper';
             const printBtn = document.createElement('button');
             printBtn.type = 'button';
-            printBtn.className = 'btn btn-sm btn-outline-secondary';
-            printBtn.style.display = 'block';
-            printBtn.style.marginTop = '6px';
+            printBtn.className = 'btn btn-sm btn-outline-secondary qr-print-btn';
+            printBtn.setAttribute('aria-label', 'Imprimir QR');
             printBtn.textContent = 'Imprimir QR';
             printBtn.addEventListener('click', function () {
                 if (window.imprimirQRCode) window.imprimirQRCode(qrDiv, info);
             });
-            qrCell.appendChild(printBtn);
+            printWrapper.appendChild(printBtn);
+            qrCell.appendChild(printWrapper);
             row.dataset.qrGenerated = '1';
         } catch (e) {
             console.error('Erro ao gerar QRCode para linha', e);
@@ -201,6 +203,16 @@ window.imprimirQRCode = function (qrContainer, infoText) {
                                 height: 160,
                                 correctLevel: QRCode.CorrectLevel.L // menor correção para aumentar capacidade
                             });
+                            // adiciona botão imprimir no modal (visível abaixo do QR)
+                            const modalPrintBtn = document.createElement('button');
+                            modalPrintBtn.type = 'button';
+                            modalPrintBtn.className = 'btn btn-sm btn-outline-primary qr-print-btn';
+                            modalPrintBtn.style.marginTop = '8px';
+                            modalPrintBtn.textContent = 'Imprimir QR';
+                            modalPrintBtn.addEventListener('click', function () {
+                                if (window.imprimirQRCode) window.imprimirQRCode(qrContainer, info);
+                            });
+                            qrContainer.appendChild(modalPrintBtn);
                         } catch (e) {
                             console.error('Erro ao gerar QRCode:', e);
                             qrContainer.textContent = 'Erro ao gerar QR';

@@ -124,3 +124,18 @@ body img.img-responsive { max-width: 100%; height: auto; }
   font-size: 0.85em;
 }
 
+/* Estilos para botão de impressão do QR dentro de células/table e modal */
+.qr-print-wrapper { text-align: right; }
+.qr-print-btn { display: inline-block; opacity: 0; transform: translateY(2px); transition: opacity 140ms ease, transform 140ms ease; }
+
+/* Mostrar botão ao passar o mouse na linha (desktop) */
+.offcanvas-body .list-unstyled li:hover .qr-print-btn,
+tr:hover .qr-print-btn {
+  opacity: 1; transform: translateY(0);
+}
+
+/* Em telas pequenas queremos o botão sempre visível (touch-friendly) */
+@media (max-width: 767px) {
+  .qr-print-btn { opacity: 1; transform: none; }
+}
+
