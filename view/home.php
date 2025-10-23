@@ -22,6 +22,19 @@
     <!-- Overrides específicos: utilitários para imagens, QR codes e offcanvas -->
     <!-- IMPORTANTE: carregado após styles.css para sobrescrever estilos -->
     <link rel="stylesheet" href="bootstrap-overrides.css">
+
+        <!-- SCRIPTS JAVASCRIPT -->
+    <!-- Bootstrap Bundle: JavaScript para componentes interativos -->
+    <!-- Inclui Popper.js para tooltips, dropdowns, modais -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script personalizado: controle do menu lateral -->
+    <!-- Gerencia abertura/fechamento e persistência no localStorage -->
+    <script src="js/menu-toggle.js"></script>
+
+    <!-- RODAPÉ -->
+    <!-- Footer simples com copyright -->
+    <!-- Estilo definido em styles.css -->
 </head>
 
 <!-- ========================================
@@ -61,7 +74,7 @@
     
     <!-- TEXTO INFORMATIVO -->
     <!-- Instrução para o usuário sobre como navegar -->
-    <p id="info">Utilize o menu para navegar pelas funcionalidades do sistema.</p>
+    <p id="info" class="text-center" style="top: auto; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"><b>Utilize o menu para navegar pelas funcionalidades do sistema.</b></p>
 
     <!-- DASHBOARD PRINCIPAL -->
     <!-- Container Bootstrap com grid responsivo para os botões de navegação -->
@@ -147,18 +160,7 @@
     <!-- Espaço visual antes do footer -->
     <br><br><br>
 
-    <!-- SCRIPTS JAVASCRIPT -->
-    <!-- Bootstrap Bundle: JavaScript para componentes interativos -->
-    <!-- Inclui Popper.js para tooltips, dropdowns, modais -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Script personalizado: controle do menu lateral -->
-    <!-- Gerencia abertura/fechamento e persistência no localStorage -->
-    <script src="js/menu-toggle.js"></script>
 
-    <!-- RODAPÉ -->
-    <!-- Footer simples com copyright -->
-    <!-- Estilo definido em styles.css -->
     <footer>
         <p>&copy; 2025 Inventário de Itens</p>
     </footer>
