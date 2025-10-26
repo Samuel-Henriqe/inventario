@@ -6,75 +6,111 @@ Resumo: Sistema web de gestão de inventário para IFPR Campus Astorga — cadas
 
 ---
 
-## 🧭 Navegador / Fluxo da Aplicação (visão por rotas)
+## 🧭 Navegação / Páginas da Aplicação
 
-- /  
-  - Landing / resumo do sistema, CTA: Entrar
-- /login  
-  - Formulário SIAPE + senha — Recuperar senha
-- /dashboard  
-  - Cards: total itens, status; gráficos e atalhos rápidos
-- /items  
-  - Lista com busca, filtros (tombamento, status, local). Ações: Novo, Importar CSV, Exportar
-- /items/{id}  
-  - Detalhe: tombamento, foto, QR (gerar/baixar), histórico, ações (editar, transferir, baixa)
-- /locations  
-  - Gerenciar salas/setores
-- /reports  
-  - Gerar relatórios PDF/CSV por filtros
-- /scan  
-  - Leitor QR (mobile) → redireciona para /items/{id}
+### **📱 Páginas Implementadas:**
+- `index.php` - Login email corporativo + senha, recuperar senha
+- `view/home.php` - Dashboard com cards de navegação
+- `view/cadastro-lista-itens.php` - CRUD completo de itens + listagem
+- `view/localizacao.php` - Gestão de localizações/setores
+- `view/etiqueta.php` - Geração de etiquetas QR individuais
+
+### **🚧 Páginas em Desenvolvimento:**
+- `view/movimento.php` - Movimentações de itens
+- `view/usuarios.php` - Gestão de usuários  
+- `view/categorias.php` - Gestão de categorias
+- `view/relatorios.php` - Relatórios e exportações
+- `view/item.php` - Detalhamento individual de item
 
 ---
 
-## ✅ Funcionalidades Principais
+## ✅ Funcionalidades Implementadas
 
-- Autenticação SIAPE com roles (admin / user)
-- CRUD de itens com validação de tombamento único
-- Geração e download de QR Code por item
-- Histórico completo de movimentações e auditoria
-- Importação CSV com relatório de erros
-- Relatórios exportáveis (PDF / CSV)
-- Controle de permissões por role
+- ✅ **Autenticação:** Login email corporativo + senha com sessões PHP
+- ✅ **CRUD de Itens:** Cadastro, listagem, edição e exclusão completos
+- ✅ **Gestão de Localizações:** CRUD de locais/setores
+- ✅ **QR Code:** Geração de etiquetas individuais para impressão
+- ✅ **Interface Responsiva:** Menu lateral desktop + offcanvas mobile
+- ✅ **Validações:** Frontend (JavaScript) + backend (PHP)
+
+## 🚧 Funcionalidades em Desenvolvimento
+
+- 🚧 **Movimentações:** Transferência de itens entre locais
+- 🚧 **Usuários:** Gestão completa de usuários e permissões  
+- 🚧 **Categorias:** CRUD de categorias de itens
+- 🚧 **Relatórios:** Exportação PDF/CSV e dashboards
+- 🚧 **Auditoria:** Histórico de alterações
 
 ---
 
 ## 🛠️ Tecnologias
 
-- Frontend: HTML5, CSS3, JavaScript, Bootstrap, Chart.js
-- Backend: PHP 8.2+, PDO (prepared statements), JWT ou sessão
-- Bibliotecas: dompdf, simplesoftwareio/simple-qrcode (Composer)
-- Banco: MySQL 8.0 (InnoDB, utf8mb4)
-- Ambiente local sugerido: XAMPP (Windows)
+- **Frontend:** HTML5, CSS3, JavaScript, Bootstrap 5.3.2, SweetAlert2
+- **Backend:** PHP 8.2+, PDO (prepared statements), Sessões PHP
+- **Bibliotecas JavaScript:** QRCode.js (geração QR), SweetAlert2 (alerts)
+- **Bibliotecas PHP:** PHPMailer (envio emails), Composer (em uso)
+- **Banco:** MySQL 8.0 (InnoDB, utf8mb4)
+- **Ambiente:** XAMPP (Apache + MySQL + PHP)
+- **Versionamento:** Git + GitHub
+- **Segurança:** Prepared statements, escape HTML, validação frontend/backend
+
 
 ---
 
-## 📁 Estrutura sugerida do repositório
+## 📁 Estrutura atual do repositório
 
-- public/ — assets, ponto de entrada
-- src/ — controllers, models, services
-- routes/ — definições de rotas web/api
-- database/ — schema.sql, seeds
-- storage/uploads — fotos e QR
-- tests/ — PHPUnit
-- documentação/ — inventario.md
+```
+inventario/
+├── controller/
+│   ├── PHPMailer/          # Biblioteca para envio de emails
+│   ├── relatorios/         # Controllers de relatórios
+│   ├── select/             # Controllers de consulta
+│   ├── insert/            # Controllers de inserção
+│   ├── update/            # Controllers de atualização
+│   ├── delete/            # Controllers de exclusão
+│   ├── conecta_bd.php     # Conexão com banco de dados
+│   └── login.php          # Autenticação
+├── view/
+│   ├── js/                # Scripts JavaScript
+│   ├── home.php           # Dashboard principal
+│   ├── cadastro-lista-itens.php  # CRUD de itens
+│   ├── localizacao.php    # Gestão de localizações
+│   ├── usuarios.php       # Gestão de usuários
+│   ├── movimento.php      # Movimentações (em desenvolvimento)
+│   ├── relatorios.php     # Relatórios (em desenvolvimento)
+│   ├── categorias.php     # Categorias (em desenvolvimento)
+│   └── styles.css         # Estilos principais
+├── qrcode/                # Biblioteca QR Code
+├── vendor/                # Dependências Composer
+├── documentação/          # Documentação completa
+└── index.php              # Página de login
+```
 
 ---
 
 ## 🚀 Instalação local (Windows / XAMPP)
 
-1. Copiar para C:\xampp\htdocs\inventario1  
-2. Criar DB e importar schema:
-   - Abra CMD:  
-     mysql -u root -p inventario1 < C:\xampp\htdocs\inventario1\database\schema.sql
-3. Copiar .env.example → .env e ajustar DB_*, APP_URL  
-4. Instalar dependências (Composer):
-   - Abra CMD em C:\xampp\htdocs\inventario1  
-     composer install
-5. Iniciar Apache e MySQL via XAMPP Control Panel  
-6. Acessar: http://localhost/inventario1
+1. **Clonar o repositório:**
+   ```bash
+   git clone https://github.com/Samuel-Henriqe/inventario.git C:\xampp\htdocs\inventario
+   ```
 
-Observação: Instale dompdf e simplesoftwareio/simple-qrcode via composer para PDFs/QR.
+2. **Configurar banco de dados:**
+   - Criar database `db_inventario` no MySQL
+   - Ajustar conexão em `controller/conecta_bd.php` se necessário
+
+3. **Instalar dependências (se necessário):**
+   ```bash
+   cd C:\xampp\htdocs\inventario
+   composer install
+   ```
+
+4. **Iniciar serviços:**
+   - Apache e MySQL via XAMPP Control Panel
+
+5. **Acessar aplicação:**
+   - URL: `http://localhost/inventario`
+   - Login: usar dados de usuário cadastrado no banco
 
 ---
 
@@ -109,7 +145,7 @@ Autenticar:
 ```bash
 curl -X POST http://localhost/inventario1/api/auth/login \
  -H "Content-Type: application/json" \
- -d '{"siape":"012345","password":"senha"}'
+ -d '{"email corporativo":"012345","password":"senha"}'
 ```
 
 Criar item:
@@ -118,11 +154,13 @@ POST /api/items
 Content-Type: application/json
 
 {
-  "tombamento":"IFPR-0001",
-  "nome":"Computador Dell",
-  "categoria":"TI",
-  "local_id":1,
-  "responsavel_id":2
+  "numero_patrimonio":"IFPR-0001",
+  "nome_item":"Computador Dell",
+  "descricao":"Computador Desktop Dell Inspiron 3020",
+  "status":"Disponivel",
+  "data_aquisicao":"2025-01-15",
+  "id_categoria":1,
+  "id_localizacao":1
 }
 ```
 
@@ -147,10 +185,9 @@ mysqldump -u root -p inventario1 > C:\backups\inventario_%DATE:~6,4%%DATE:~3,2%%
 
 ## 👥 Contatos / Responsáveis
 
-- Backend: Jeferson  
-- Frontend: João  
-- QA / Documentação: Asael  
-- Líder: Samuel
+- **Líder do Projeto:** Samuel Henrique
+- **Desenvolvimento:** Equipe IFPR Campus Astorga
+- **GitHub:** [Samuel-Henriqe/inventario](https://github.com/Samuel-Henriqe/inventario)
 
 ---
 

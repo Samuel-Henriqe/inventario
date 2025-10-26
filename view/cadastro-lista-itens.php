@@ -217,17 +217,17 @@
 
                 <!-- Campo obrigatório para descrição detalhada do item -->
                 <div class="mb-3">
-                    <label for="descricao_item" class="form-label" style="text-decoration-color: black;">Descrição</label>
-                    <input type="text" id="descricao_item" name="descricao_item" class="form-control" required>
+                    <label for="descricao" class="form-label" style="text-decoration-color: black;">Descrição</label>
+                    <input type="text" id="descricao" name="descricao" class="form-control" required>
                 </div>
 
                 <!-- Select obrigatório para status do item (ativo/inativo/desativado) -->
                 <div class="mb-3">
-                    <label for="status_item" class="form-label" style="text-decoration-color: black;">Status</label>
-                    <select name="status_item" id="status_item" class="form-select" required>
+                    <label for="status" class="form-label" style="text-decoration-color: black;">Status</label>
+                    <select name="status" id="status" class="form-select" required>
                         <option value="">Selecione o status</option>
-                        <option value="ativo">Ativo</option>
-                        <option value="inativo">Inativo</option>
+                        <option value="Em uso">Em uso</option>
+                        <option value="Disponivel">Disponível</option>
                         <option value="desativado">Desativado</option>
                     </select>
                 </div>
@@ -253,6 +253,8 @@
                         <option value="">Carregando categorias...</option>
                     </select>
                 </div>
+                
+
 
                 <!-- Botão de submissão do formulário -->
                 <button type="submit" class="btn btn-primary">Adicionar Item</button>
@@ -385,9 +387,9 @@
                     '<input id="swal-descricao" class="swal2-input" placeholder="Descrição" value="' + escapeHtml(descricao) + '">' +
                     '<input id="swal-unidade" class="swal2-input" placeholder="Unidade de Medida" value="' + escapeHtml(unidade) + '">' +
                     '<select id="swal-status" class="swal2-select">' +
-                    '<option value="ativo"' + (status === 'ativo' ? ' selected' : '') + '>Ativo</option>' +
-                    '<option value="inativo"' + (status === 'inativo' ? ' selected' : '') + '>Inativo</option>' +
-                    '<option value="desativado"' + (status === 'desativado' ? ' selected' : '') + '>Desativado</option>' +
+                    '<option value="Em uso"' + (status === 'Em uso' ? ' selected' : '') + '>Em uso</option>' +
+                    '<option value="Disponivel"' + (status === 'Disponivel' ? ' selected' : '') + '>Disponível</option>' +
+                    '<option value="Desativado"' + (status === 'Desativado' ? ' selected' : '') + '>Desativado</option>' +
                     '</select>' +
                     '<input id="swal-data" type="date" class="swal2-input" value="' + escapeHtml(dataAq) + '">' +
                     '<input id="swal-local" class="swal2-input" placeholder="Localização (id ou nome)" value="' + escapeHtml(localizacao) + '">',

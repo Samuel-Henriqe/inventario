@@ -9,10 +9,11 @@ if (
     $numero_patrimonio = $_POST["numero_patrimonio"];
     $nome_item = $_POST["nome_item"];
     $descricao_item = $_POST["descricao_item"];
-    $status_item = $_POST["status_item"];
+    $status = $_POST["status"];
     $data_aquisicao = $_POST["data_aquisicao"];
     $id_localizacao = $_POST["id_local"];
     $id_categoria = $_POST["id_categoria"];
+    $id_usuario_cadastro = $_POST["id_usuario"]; // Defina o ID do usuário logado conforme necessário
 
     try {
         // Inserir item na tabela `itens`
@@ -47,7 +48,7 @@ if (
         $stmt->bindParam(':numero_patrimonio', $numero_patrimonio);
         $stmt->bindParam(':id_categoria', $id_categoria, PDO::PARAM_INT);
         $stmt->bindParam(':id_localizacao', $id_localizacao, PDO::PARAM_INT);
-        $stmt->bindParam(':status', $status_item);
+        $stmt->bindParam(':status', $status);
         $stmt->bindParam(':data_aquisicao', $data_aquisicao);
         $stmt->bindParam(':id_usuario_cadastro', $id_usuario_cadastro, PDO::PARAM_INT);
 
