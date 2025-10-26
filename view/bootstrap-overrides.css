@@ -1,0 +1,225 @@
+/* ===================================================
+   BOOTSTRAP OVERRIDES E UTILITÁRIOS ESPECÍFICOS
+   ===================================================
+   
+   PROPÓSITO:
+   - Adiciona utilitários específicos sem alterar estilos base
+   - Complementa o Bootstrap com funcionalidades personalizadas
+   - Deve ser carregado APÓS view/styles.css
+   
+   CONTEÚDO:
+   1. Utilitários para imagens responsivas
+   2. Helpers para lazy loading e aspectos
+   3. Estilos para offcanvas (menu lateral)
+   4. Estilos para botões de impressão QR
+   ===================================================
+*/
+
+/* ========================================
+   1. UTILITÁRIOS PARA IMAGENS RESPONSIVAS
+   ========================================
+   Classes para tornar imagens adaptáveis e otimizadas
+*/
+
+/* Torna imagens responsivas por padrão em áreas de conteúdo */
+/* Útil para imagens carregadas dinamicamente ou em relatórios */
+.img-responsive,
+img.img-responsive {
+    max-width: 100%;        /* Nunca ultrapassa o container pai */
+    height: auto;           /* Mantém proporção original */
+    display: block;         /* Remove espaço inline padrão */
+}
+
+/* Utilitário para manter proporção específica (aspect ratio) */
+/* Usado quando você precisa de um container com proporção fixa */
+.img-cover {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 - altere conforme necessário */
+    position: relative;
+    overflow: hidden;       /* Esconde partes que excedem o container */
+}
+
+/* Imagem dentro do container com proporção fixa */
+.img-cover img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);  /* Centraliza perfeitamente */
+    object-fit: cover;                 /* Preenche sem distorcer */
+}
+
+
+/* ========================================
+   2. HELPERS PARA LAZY LOADING
+   ========================================
+   Utilitários para carregamento otimizado de imagens
+*/
+
+/* Placeholder para imagens em carregamento (Low Quality Image Placeholder) */
+/* Use enquanto a imagem real está sendo carregada */
+.lqip {
+    background-color: #eee;      /* Cor neutra de fundo */
+    background-size: cover;      /* Preenche o espaço */
+    background-position: center; /* Centraliza o conteúdo */
+}
+
+/* Centralizar imagens dentro de botões ou links */
+.img-center {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Avatar pequeno e responsivo */
+/* Útil para fotos de perfil em listas ou headers */
+.img-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;  /* Forma circular */
+    object-fit: cover;   /* Preenche sem distorcer */
+}
+
+
+/* ========================================
+   3. ACESSIBILIDADE PARA IMAGENS
+   ========================================
+   Melhora a experiência para usuários com deficiência
+*/
+
+/* Garante que imagens interativas tenham outline no foco */
+/* Importante para navegação por teclado */
+img[tabindex]:focus {
+    outline: 3px solid #354d39;  /* Verde com transparência */
+    outline-offset: 2px;                     /* Espaço entre imagem e outline */
+}
+
+/* Evita que Bootstrap sobrescreva utilitários locais */
+/* Especificidade alta para garantir precedência */
+body img.img-responsive { 
+    max-width: 100%; 
+    height: auto; 
+}
+
+/* ========================================
+   4. GUIA DE OTIMIZAÇÃO DE IMAGENS
+   ========================================
+   Exemplo de HTML para melhor performance:
+   
+   <img src="/uploads/item-480.jpg"
+        srcset="/uploads/item-320.jpg 320w, 
+                /uploads/item-480.jpg 480w, 
+                /uploads/item-800.jpg 800w"
+        sizes="(max-width: 600px) 100vw, 480px"
+        loading="lazy"
+        class="img-responsive"
+        alt="Descrição do item">
+   
+   - srcset: diferentes tamanhos da imagem
+   - sizes: quando usar cada tamanho
+   - loading="lazy": carrega apenas quando necessário
+   - alt: descrição para acessibilidade
+*/
+
+
+/* ========================================
+   5. ESTILOS PARA OFFCANVAS (MENU MOBILE)
+   ========================================
+   Customização do menu lateral para parecer tabela
+   Melhora a organização visual dos itens de navegação
+*/
+
+/* Estiliza o corpo do offcanvas como cabeçalho de tabela */
+/* Gradiente sutil + sombra para dar profundidade visual */
+.offcanvas-body {
+    background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(248,249,250,0.98) 100%);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 0.5rem 0.75rem;
+    margin: 0;
+}
+
+/* Remove espaçamentos padrão da lista */
+.offcanvas-body .list-unstyled {
+    margin: 0;
+    padding: 0;
+}
+
+/* Adiciona separadores entre itens do menu */
+/* Cada item parece uma linha de tabela */
+.offcanvas-body .list-unstyled li {
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Estiliza os links como células de tabela */
+.offcanvas-body .list-unstyled li a {
+    display: flex;                                      /* Layout flexível */
+    align-items: center;                               /* Alinha verticalmente */
+    justify-content: space-between;                    /* Espaça conteúdo */
+    padding: 0.65rem 0.5rem;                          /* Espaçamento interno */
+    color: #222 !important;                           /* Cor escura */
+    text-decoration: none !important;                 /* Remove sublinhado */
+    transition: background-color 120ms ease, color 120ms ease; /* Transição suave */
+}
+
+/* Efeito hover nos links do menu */
+.offcanvas-body .list-unstyled li a:hover {
+    background-color: rgba(0,0,0,0.03);               /* Fundo sutil no hover */
+    color: #000 !important;                           /* Texto mais escuro */
+}
+
+/* Destaca o título do offcanvas */
+.offcanvas-header .offcanvas-title {
+    font-weight: 600;                                 /* Negrito */
+    letter-spacing: 0.2px;                           /* Espaçamento entre letras */
+}
+
+/* Espaçamento adicional no primeiro item */
+.offcanvas-body .list-unstyled li:first-child a {
+    padding-top: 0.85rem;
+}
+
+/* Estiliza badges ou ícones à direita dos links */
+.offcanvas-body .list-unstyled li a .badge {
+    opacity: 0.85;                                    /* Levemente transparente */
+    font-size: 0.85em;                               /* Tamanho menor */
+}
+
+
+/* ========================================
+   6. ESTILOS PARA BOTÕES DE IMPRESSÃO QR
+   ========================================
+   Sistema de botões que aparecem/desaparecem baseado em hover
+   Melhora UX sem poluir a interface
+*/
+
+/* Container dos botões de impressão */
+.qr-print-wrapper { 
+    text-align: right; 
+}
+
+/* Botão de impressão - inicialmente oculto */
+.qr-print-btn { 
+    display: inline-block; 
+    opacity: 0;                                       /* Invisível por padrão */
+    transform: translateY(2px);                       /* Ligeiramente deslocado */
+    transition: opacity 140ms ease, transform 140ms ease; /* Transição suave */
+}
+
+/* Mostra botão ao passar mouse na linha (desktop) */
+.offcanvas-body .list-unstyled li:hover .qr-print-btn,
+tr:hover .qr-print-btn {
+    opacity: 1;                                       /* Torna visível */
+    transform: translateY(0);                         /* Remove deslocamento */
+}
+
+/* Em telas pequenas, botão sempre visível (touch-friendly) */
+/* Dispositivos móveis não têm hover, então precisa estar sempre visível */
+@media (max-width: 767px) {
+    .qr-print-btn { 
+        opacity: 1; 
+        transform: none; 
+    }
+}
+

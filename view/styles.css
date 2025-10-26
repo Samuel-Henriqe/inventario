@@ -1,0 +1,191 @@
+﻿/* ===================================================
+   SISTEMA DE INVENTÁRIO - CSS PERSONALIZADO
+   ===================================================
+   
+   PROPÓSITO:
+   Este arquivo contém apenas os estilos essenciais 
+   específicos do projeto. O Bootstrap 5 cuida de:
+   - Grid system e responsividade
+   - Componentes (botões, forms, cards, etc)
+   - Utilitários (margins, paddings, cores, etc)
+   
+   ESTRUTURA:
+   1. Variáveis CSS customizadas
+   2. Header fixo personalizado
+   3. Ajustes para layout
+   4. Footer simples
+   ===================================================
+*/
+main {
+   padding: 150px;
+   background: var(--background-color, #f8f9fa);
+   color: rgba(17, 17, 17, 0.856);
+}
+
+
+/* ========================================
+   1. VARIÁVEIS CSS CUSTOMIZADAS
+   ========================================
+   Define as cores e medidas principais do projeto
+   Facilita manutenção e consistência visual
+*/
+:root {
+    /* Cores principais do sistema */
+    --primary: #354d39;        /* Verde - cor principal (header, botões) */
+    --accent: #852124;         /* Vermelho - cor de destaque (alerts, hover) */
+    
+    /* Medidas estruturais */
+    --header-height: 66px;     /* Altura fixa do header para cálculos de layout */
+}
+
+
+/* ========================================
+   2. HEADER FIXO PERSONALIZADO
+   ========================================
+   Cabeçalho fixo no topo com cor personalizada
+   Substitui o header padrão do Bootstrap
+*/
+header {
+    /* Cor de fundo usando variável CSS */
+    background: var(--primary);
+    color: #ffffffce;
+    
+    /* Sombra sutil para destacar do conteúdo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    /* Posicionamento fixo no topo */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    
+    /* Z-index alto para ficar sobre outros elementos */
+    /* Bootstrap usa z-index até 1050, então 1020 é seguro */
+    z-index: 1020;
+}
+
+
+/* ========================================
+   3. AJUSTES PARA LAYOUT
+   ========================================
+   Compensações e ajustes para o header fixo
+*/
+body {
+   color: #000 !important;
+   /* Fonte do sistema para melhor performance */
+   /* system-ui usa a fonte padrão do SO */
+   font-family: system-ui, -apple-system, sans-serif;
+}
+
+
+/* ========================================
+   4. MENU LATERAL RESPONSIVO
+   ========================================
+   Estilos para controle de visibilidade do menu
+   Funciona em conjunto com menu-toggle.js
+*/
+
+/* Container do menu lateral desktop */
+#menulocalizacao {
+    position: fixed;
+    top: var(--header-height);
+    left: -250px;
+    width: 250px;
+    height: calc(100vh - var(--header-height));
+    background: var(--primary);
+    border-right: 1px solid #dee2e6;
+    z-index: 1010;
+    padding: 20px 0;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+/* Estado aberto do menu desktop */
+#menulocalizacao.open {
+    left: 0 !important;
+}
+
+/* Menu lista base */
+.menulocalizacao {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Links do menu - APENAS dentro do menu lateral */
+#menulocalizacao .menulocalizacao a {
+    color: white !important;
+    text-decoration: none !important;
+    padding: 12px 20px;
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+#menulocalizacao .menulocalizacao a:hover {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid #ffffff;
+    padding-left: 16px;
+}
+
+/* Ajuste do conteúdo principal quando menu está aberto */
+@media (min-width: 768px) {
+    body.menu-open main {
+        margin-left: 250px;
+        transition: margin-left 0.3s ease;
+    }
+}
+
+/* Em telas menores, menu lateral não interfere no layout */
+@media (max-width: 767px) {
+    .sidebar-desktop {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   6. CORREÇÃO DE CORES DO CONTEÚDO
+   ========================================
+   Garante que todo texto fora do menu seja preto
+*/
+/* Offcanvas também com links brancos */
+.offcanvas-body a {
+    color: white !important;
+}
+
+.offcanvas-body a:hover {
+    color: #cccccc !important;
+}
+
+
+div #tabela_de_localizacao {
+    color: black !important;
+    padding: 150px;
+   
+
+
+
+}
+
+
+/* ========================================
+   5. FOOTER SIMPLES
+   ========================================
+   Rodapé básico com copyright
+   Mantém consistência visual em todas as páginas
+*/
+footer {
+    /* Centralização do texto */
+    text-align: center;
+    
+    /* Espaçamento interno e externo */
+    padding: 20px;
+    margin-top: 40px;
+    
+    /* Cor mais sutil para não competir com conteúdo */
+    color: #666;
+    
+    /* Linha sutil para separar do conteúdo */
+    border-top: 1px solid #eeeeeebd;
+}
