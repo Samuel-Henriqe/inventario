@@ -185,8 +185,8 @@ mysqldump -u root -p inventario1 > C:\backups\inventario_%DATE:~6,4%%DATE:~3,2%%
 
 ## 👥 Contatos / Responsáveis
 
-- **Líder do Projeto:** Samuel Henrique
-- **Desenvolvimento:** Equipe IFPR Campus Astorga
+- **Líder do Projeto:**
+- **Desenvolvimento:** Asael celeghim barbão, Jerferson rodrigo, João Caio, Samuel henrique
 - **GitHub:** [Samuel-Henriqe/inventario](https://github.com/Samuel-Henriqe/inventario)
 
 ---
